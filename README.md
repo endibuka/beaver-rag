@@ -1,8 +1,8 @@
-# RAG System
+# beaver-rag 🦫
 
 > Lightweight TypeScript RAG (Retrieval-Augmented Generation) system with PostgreSQL and OpenAI
 
-A production-ready, extensible RAG system built with TypeScript, designed for developers who want to add semantic search and retrieval capabilities to their applications.
+A production-ready, extensible RAG system built with TypeScript, designed for developers who want to add semantic search and retrieval capabilities to their applications. Built by beavers, for builders.
 
 ## Features
 
@@ -18,13 +18,13 @@ A production-ready, extensible RAG system built with TypeScript, designed for de
 
 ```bash
 # Using Bun
-bun add rag-system
+bun add beaver-rag
 
 # Using npm
-npm install rag-system
+npm install beaver-rag
 
 # Using pnpm
-pnpm add rag-system
+pnpm add beaver-rag
 ```
 
 ## Requirements
@@ -53,7 +53,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 ### 3. Use the RAG system
 
 ```typescript
-import { RAGClient, OpenAIEmbeddings, PostgresDatabase } from 'rag-system';
+import { RAGClient, OpenAIEmbeddings, PostgresDatabase } from 'beaver-rag';
 
 // Initialize providers
 const embeddings = new OpenAIEmbeddings({
@@ -177,7 +177,7 @@ new PostgresDatabase({
 Splits text while preserving semantic meaning using a hierarchy of separators.
 
 ```typescript
-import { RecursiveChunking } from 'rag-system';
+import { RecursiveChunking } from 'beaver-rag';
 
 const chunking = new RecursiveChunking({
   chunkSize: 400,
@@ -191,7 +191,7 @@ const chunking = new RecursiveChunking({
 Splits text into fixed-size chunks with overlap.
 
 ```typescript
-import { FixedSizeChunking } from 'rag-system';
+import { FixedSizeChunking } from 'beaver-rag';
 
 const chunking = new FixedSizeChunking({
   chunkSize: 500,
@@ -258,7 +258,7 @@ import {
   EmbeddingError,
   DatabaseError,
   ValidationError
-} from 'rag-system';
+} from 'beaver-rag';
 
 try {
   await rag.addDocument(content, metadata);

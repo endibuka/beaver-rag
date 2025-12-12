@@ -1,7 +1,7 @@
 {
-  "name": "rag-system",
+  "name": "beaver-rag",
   "version": "0.1.0",
-  "description": "Lightweight TypeScript RAG system with PostgreSQL and OpenAI",
+  "description": "Lightweight TypeScript RAG system with PostgreSQL and OpenAI - Built by beavers, for builders 🦫",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -18,19 +18,19 @@
       }
     },
     "./embeddings": {
+      "types": "./dist/embeddings/index.d.ts",
       "import": "./dist/embeddings/index.mjs",
-      "require": "./dist/embeddings/index.js",
-      "types": "./dist/embeddings/index.d.ts"
+      "require": "./dist/embeddings/index.js"
     },
     "./database": {
+      "types": "./dist/database/index.d.ts",
       "import": "./dist/database/index.mjs",
-      "require": "./dist/database/index.js",
-      "types": "./dist/database/index.d.ts"
+      "require": "./dist/database/index.js"
     },
     "./chunking": {
+      "types": "./dist/chunking/index.d.ts",
       "import": "./dist/chunking/index.mjs",
-      "require": "./dist/chunking/index.js",
-      "types": "./dist/chunking/index.d.ts"
+      "require": "./dist/chunking/index.js"
     }
   },
   "files": [
@@ -41,11 +41,13 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "test": "bun test",
+    "test:unit": "bun test tests/unit",
+    "test:integration": "bun test tests/integration",
     "test:coverage": "bun test --coverage",
     "lint": "eslint src tests",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "bun run build && bun run test"
+    "prepublishOnly": "bun run build && bun run test:unit"
   },
   "keywords": [
     "rag",
@@ -58,12 +60,16 @@
     "typescript",
     "bun"
   ],
-  "author": "",
+  "author": "Endi Buka <endibuka@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/endibuka/beaver-rag"
   },
+  "bugs": {
+    "url": "https://github.com/endibuka/beaver-rag/issues"
+  },
+  "homepage": "https://github.com/endibuka/beaver-rag#readme",
   "engines": {
     "node": ">=18.0.0"
   },

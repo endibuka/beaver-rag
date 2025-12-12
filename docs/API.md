@@ -32,7 +32,7 @@ new RAGClient(config: RAGConfig)
 **Example:**
 
 ```typescript
-import { RAGClient, OpenAIEmbeddings, PostgresDatabase } from 'rag-system';
+import { RAGClient, OpenAIEmbeddings, PostgresDatabase } from 'beaver-rag';
 
 const rag = new RAGClient({
   embeddings: new OpenAIEmbeddings({
@@ -543,7 +543,7 @@ class ChunkingError extends RAGError
 ### Token Counter
 
 ```typescript
-import { countTokens, validateTokenLimit } from 'rag-system';
+import { countTokens, validateTokenLimit } from 'beaver-rag';
 
 // Count tokens
 const tokens = countTokens('Hello, world!', 'text-embedding-3-small');
@@ -555,7 +555,7 @@ validateTokenLimit(text, 8191); // Throws ValidationError if exceeded
 ### Validation
 
 ```typescript
-import { validateDocumentInput, validateSearchOptions } from 'rag-system';
+import { validateDocumentInput, validateSearchOptions } from 'beaver-rag';
 
 const validDoc = validateDocumentInput({ content: 'text', metadata: {} });
 const validOptions = validateSearchOptions({ limit: 10, minSimilarity: 0.7 });
@@ -574,7 +574,7 @@ import {
   RAGError,
   EmbeddingError,
   DatabaseError,
-} from 'rag-system';
+} from 'beaver-rag';
 
 async function main() {
   // Initialize
