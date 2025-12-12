@@ -1,0 +1,10 @@
+[install]
+# Use npm registry
+registry = "https://registry.npmjs.org"
+
+# Freeze lockfile in CI
+frozen-lockfile = false
+
+[test]
+# Test configuration
+preload = ["./tests/setup.ts"]

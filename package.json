@@ -1,0 +1,88 @@
+{
+  "name": "rag-system",
+  "version": "0.1.0",
+  "description": "Lightweight TypeScript RAG system with PostgreSQL and OpenAI",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./embeddings": {
+      "import": "./dist/embeddings/index.mjs",
+      "require": "./dist/embeddings/index.js",
+      "types": "./dist/embeddings/index.d.ts"
+    },
+    "./database": {
+      "import": "./dist/database/index.mjs",
+      "require": "./dist/database/index.js",
+      "types": "./dist/database/index.d.ts"
+    },
+    "./chunking": {
+      "import": "./dist/chunking/index.mjs",
+      "require": "./dist/chunking/index.js",
+      "types": "./dist/chunking/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "lint": "eslint src tests",
+    "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run build && bun run test"
+  },
+  "keywords": [
+    "rag",
+    "retrieval-augmented-generation",
+    "vector-database",
+    "embeddings",
+    "openai",
+    "postgresql",
+    "pgvector",
+    "typescript",
+    "bun"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "openai": "^4.70.0",
+    "pg": "^8.13.1",
+    "pgvector": "^0.2.0",
+    "tiktoken": "^1.0.17",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.7.2",
+    "tsup": "^8.3.5",
+    "prettier": "^3.4.2",
+    "eslint": "^9.17.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0"
+  }
+}
