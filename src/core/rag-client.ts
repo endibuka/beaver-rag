@@ -208,10 +208,55 @@ export class RAGClient {
     // Generate embedding for the query
     const embeddingResult = await this.embeddings.embed(query);
 
-    // Search the database
-    const results = await this.database.search(embeddingResult.embedding, options);
+    // Apply defaults
+    const searchOptions = {
+      limit: options?.limit ?? 5,
+      minSimilarity: options?.minSimilarity ?? 0.5,
+      filters: options?.filters,
+      maxChunksPerDocument: options?.maxChunksPerDocument ?? 2,
+      useAdaptiveThreshold: options?.useAdaptiveThreshold ?? false,
+    };
 
-    return results;
+    // Get more results initially for filtering
+    const initialLimit = searchOptions.maxChunksPerDocument
+      ? searchOptions.limit * 3
+      : searchOptions.limit;
+
+    // Search the database with higher limit
+    const allResults = await this.database.search(embeddingResult.embedding, {
+      ...searchOptions,
+      limit: initialLimit,
+    });
+
+    // Apply adaptive threshold if enabled
+    let filteredResults = allResults;
+    if (searchOptions.useAdaptiveThreshold && allResults.length > 0) {
+      const topScore = allResults[0].similarity;
+      const adaptiveThreshold = Math.max(
+        topScore * 0.8, // Within 20% of top result
+        searchOptions.minSimilarity // But not below minimum
+      );
+      filteredResults = allResults.filter(r => r.similarity >= adaptiveThreshold);
+    }
+
+    // Apply chunk diversity (limit chunks from same document)
+    if (searchOptions.maxChunksPerDocument) {
+      const documentChunkCounts = new Map<string, number>();
+      filteredResults = filteredResults.filter(result => {
+        const originalContent = result.document.metadata.originalContent;
+        if (!originalContent) return true; // Not a chunk, include it
+
+        const count = documentChunkCounts.get(originalContent) || 0;
+        if (count < searchOptions.maxChunksPerDocument) {
+          documentChunkCounts.set(originalContent, count + 1);
+          return true;
+        }
+        return false;
+      });
+    }
+
+    // Return top N results
+    return filteredResults.slice(0, searchOptions.limit);
   }
 
   /**

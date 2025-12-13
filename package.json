@@ -1,7 +1,7 @@
 {
   "name": "beaver-rag",
-  "version": "0.1.1",
-  "description": "Lightweight TypeScript RAG system with PostgreSQL and OpenAI - Built by beavers, for builders 🦫",
+  "version": "0.2.0",
+  "description": "Lightweight TypeScript RAG system with PostgreSQL, OpenAI & Cohere - Built by beavers, for builders 🦫",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

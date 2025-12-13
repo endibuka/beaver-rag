@@ -24,12 +24,16 @@ export interface Document<T = Record<string, any>> {
  * Options for searching documents
  */
 export interface SearchOptions {
-  /** Maximum number of results to return (default: 10) */
+  /** Maximum number of results to return (default: 5) */
   limit?: number;
-  /** Minimum similarity score (0-1) to include in results */
+  /** Minimum similarity score (0-1) to include in results (default: 0.5) */
   minSimilarity?: number;
   /** Metadata filters to apply (exact match on metadata fields) */
   filters?: Record<string, any>;
+  /** Maximum number of chunks from the same document (default: 2 for diversity) */
+  maxChunksPerDocument?: number;
+  /** Use adaptive threshold based on result distribution (default: false) */
+  useAdaptiveThreshold?: boolean;
 }
 
 /**
