@@ -4,33 +4,33 @@
   "description": "Lightweight TypeScript RAG system with PostgreSQL and OpenAI - Built by beavers, for builders 🦫",
   "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.mjs"
+        "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     },
     "./embeddings": {
       "types": "./dist/embeddings/index.d.ts",
-      "import": "./dist/embeddings/index.mjs",
-      "require": "./dist/embeddings/index.js"
+      "import": "./dist/embeddings/index.js",
+      "require": "./dist/embeddings/index.cjs"
     },
     "./database": {
       "types": "./dist/database/index.d.ts",
-      "import": "./dist/database/index.mjs",
-      "require": "./dist/database/index.js"
+      "import": "./dist/database/index.js",
+      "require": "./dist/database/index.cjs"
     },
     "./chunking": {
       "types": "./dist/chunking/index.d.ts",
-      "import": "./dist/chunking/index.mjs",
-      "require": "./dist/chunking/index.js"
+      "import": "./dist/chunking/index.js",
+      "require": "./dist/chunking/index.cjs"
     }
   },
   "files": [
